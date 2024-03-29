@@ -1,0 +1,17 @@
+template>
+    <lightning-card title="Product List" icon-name="custom:custom14">
+        <div class="slds-m-around_medium">
+            <template if:true={products}>
+                <lightning-datatable
+                    data={products}
+                    columns={columns}
+                    key-field="id"
+                    hide-checkbox-column="true">
+                </lightning-datatable>
+            </template>
+            <template if:false={products}>
+                <p>No products available.</p>
+            </template>
+        </div>
+    </lightning-card>
+</template
