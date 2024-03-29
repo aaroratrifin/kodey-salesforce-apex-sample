@@ -1,0 +1,11 @@
+template>
+    <lightning-card title="Inventory Status" icon-name="custom:custom63">
+        <div class="slds-m-around_medium">
+            <template for:each={inventoryItems} for:item="item">
+                <div key={item.Id}>
+                    <p>{item.ProductName} - Quantity: {item.Quantity__c}, Status: {item.Status__c}</p>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template
