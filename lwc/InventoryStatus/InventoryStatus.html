@@ -1,0 +1,17 @@
+template>
+    <lightning-card title="Inventory Status" icon-name="custom:custom15">
+        <div class="slds-m-around_medium">
+            <template if:true={inventoryItems}>
+                <lightning-datatable
+                    data={inventoryItems}
+                    columns={columns}
+                    key-field="id"
+                    hide-checkbox-column="true">
+                </lightning-datatable>
+            </template>
+            <template if:false={inventoryItems}>
+                <p>No inventory items available.</p>
+            </template>
+        </div>
+    </lightning-card>
+</template
