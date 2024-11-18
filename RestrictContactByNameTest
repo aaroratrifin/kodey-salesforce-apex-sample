@@ -1,0 +1,40 @@
+@isTest
+private class RestrictContactByNameTest {
+    @isTest static void testInsertContactWithValidName() {
+        Contact c = new Contact(LastName='ValidName');
+        Test.startTest();
+        insert c;
+        Test.stopTest();
+        // Query to verify insertion
+        Contact insertedContact = [SELECT LastName FROM Contact WHERE Id = :c.Id];
+        System.assertEquals('ValidName', insertedContact.LastName);
+    }
+    
+    @isTest static void testInsertContactWithInvalidName() {
+        Contact c = new Contact(LastName='INVALIDNAME');
+        Boolean exceptionThrown = false;
+        Test.startTest();
+        try {
+            insert c;
+        } catch(DmlException e) {
+            exceptionThrown = true;
+        }
+        Test.stopTest();
+        System.assertTrue(exceptionThrown, 'Exception should be thrown for invalid name');
+    }
+    
+    @isTest static void testUpdateContactToInvalidName() {
+        Contact c = new Contact(LastName='InitiallyValid');
+        insert c;
+        c.LastName = 'INVALIDNAME';
+        Boolean exceptionThrown = false;
+        Test.startTest();
+        try {
+            update c;
+        } catch(DmlException e) {
+            exceptionThrown = true;
+        }
+        Test.stopTest();
+        System.assertTrue(exceptionThrown, 'Exception should be thrown when updating to an invalid name');
+    }
+}
